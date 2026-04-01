@@ -22,7 +22,6 @@ class AppTheme {
         primary: f1Red,
         secondary: f1Red,
         surface: surface,
-        background: bg,
       ),
       appBarTheme: AppBarTheme(
         backgroundColor: bg,
@@ -30,20 +29,19 @@ class AppTheme {
         elevation: 0,
         scrolledUnderElevation: 0,
         systemOverlayStyle: SystemUiOverlayStyle.light,
-        titleTextStyle: GoogleFonts.outfit(
+        titleTextStyle: GoogleFonts.russoOne(
           color: textPrimary,
           fontSize: 20,
-          fontWeight: FontWeight.w700,
         ),
       ),
-      textTheme: GoogleFonts.outfitTextTheme(ThemeData.dark().textTheme).copyWith(
-        displayLarge: GoogleFonts.outfit(color: textPrimary, fontWeight: FontWeight.w900, fontSize: 40),
-        displayMedium: GoogleFonts.outfit(color: textPrimary, fontWeight: FontWeight.w800, fontSize: 28),
-        titleLarge: GoogleFonts.outfit(color: textPrimary, fontWeight: FontWeight.w700, fontSize: 20),
-        titleMedium: GoogleFonts.outfit(color: textPrimary, fontWeight: FontWeight.w600, fontSize: 16),
-        bodyLarge: GoogleFonts.outfit(color: textPrimary, fontSize: 16),
-        bodyMedium: GoogleFonts.outfit(color: textSecondary, fontSize: 14),
-        bodySmall: GoogleFonts.outfit(color: textMuted, fontSize: 12),
+      textTheme: GoogleFonts.interTextTheme(ThemeData.dark().textTheme).copyWith(
+        displayLarge: GoogleFonts.russoOne(color: textPrimary, fontSize: 40),
+        displayMedium: GoogleFonts.russoOne(color: textPrimary, fontSize: 28),
+        titleLarge: GoogleFonts.russoOne(color: textPrimary, fontSize: 20),
+        titleMedium: GoogleFonts.russoOne(color: textPrimary, fontSize: 16),
+        bodyLarge: GoogleFonts.inter(color: textPrimary, fontSize: 16),
+        bodyMedium: GoogleFonts.inter(color: textSecondary, fontSize: 14),
+        bodySmall: GoogleFonts.inter(color: textMuted, fontSize: 12),
       ),
       useMaterial3: true,
     );

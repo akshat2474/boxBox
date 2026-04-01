@@ -1,3 +1,4 @@
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -5,6 +6,7 @@ import 'package:intl/intl.dart';
 
 import '../../../../core/theme/liquid_glass_theme.dart';
 import '../../../../models/session.dart';
+import '../../../../shared/glass_card.dart';
 import '../../../services/openf1_service.dart';
 import '../../../services/standings_service.dart';
 
@@ -18,7 +20,26 @@ class HomeScreen extends ConsumerWidget {
 
     return Scaffold(
       backgroundColor: AppTheme.bg,
-      body: CustomScrollView(
+      body: Stack(
+        children: [
+          // Ambient background gradient for Glassmorphism to catch light
+          Positioned(
+            top: -100,
+            right: -50,
+            child: Container(
+              width: 300,
+              height: 300,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: AppTheme.f1Red.withOpacity(0.15),
+              ),
+              child: BackdropFilter(
+                filter: ImageFilter.blur(sigmaX: 100, sigmaY: 100),
+                child: Container(),
+              ),
+            ),
+          ),
+          CustomScrollView(
         slivers: [
           // App Bar
           SliverAppBar(
@@ -79,15 +100,11 @@ class HomeScreen extends ConsumerWidget {
                                 'title': '${s.sessionName} · ${s.circuitShortName}',
                                 'dateStart': s.dateStart,
                               }),
-                              child: Container(
+                              child: GlassCard(
                                 width: 160,
                                 margin: const EdgeInsets.only(right: 12, bottom: 4),
                                 padding: const EdgeInsets.all(14),
-                                decoration: BoxDecoration(
-                                  color: AppTheme.surface,
-                                  borderRadius: BorderRadius.circular(12),
-                                  border: Border.all(color: AppTheme.border),
-                                ),
+                                borderRadius: 12,
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -116,14 +133,10 @@ class HomeScreen extends ConsumerWidget {
                           'title': '${latestSession.sessionName} · ${latestSession.circuitShortName}',
                           'dateStart': latestSession.dateStart,
                         }),
-                        child: Container(
+                        child: GlassCard(
                           margin: const EdgeInsets.symmetric(horizontal: 16),
                           height: 120,
-                          decoration: BoxDecoration(
-                            color: AppTheme.surface,
-                            borderRadius: BorderRadius.circular(12),
-                            border: Border.all(color: AppTheme.border),
-                          ),
+                          borderRadius: 12,
                           child: Row(
                             children: [
                               Container(
@@ -182,13 +195,9 @@ class HomeScreen extends ConsumerWidget {
                       title: 'Driver Standings',
                       onViewAll: () => context.push('/standings'),
                     ),
-                    Container(
+                    GlassCard(
                       margin: const EdgeInsets.symmetric(horizontal: 16),
-                      decoration: BoxDecoration(
-                        color: AppTheme.surface,
-                        borderRadius: BorderRadius.circular(12),
-                        border: Border.all(color: AppTheme.border),
-                      ),
+                      borderRadius: 12,
                       child: Column(
                         children: [
                           for (int i = 0; i < top5.length; i++) ...[
@@ -249,6 +258,8 @@ class HomeScreen extends ConsumerWidget {
           ),
         ],
       ),
+        ],
+      ),
     );
   }
 }
@@ -277,13 +288,9 @@ class _NextRaceHero extends StatelessWidget {
         'title': '${session.sessionName} · ${session.circuitShortName}',
         'dateStart': session.dateStart,
       }),
-      child: Container(
+      child: GlassCard(
         margin: const EdgeInsets.fromLTRB(16, 8, 16, 24),
-        decoration: BoxDecoration(
-          color: AppTheme.surface,
-          borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: AppTheme.border),
-        ),
+        borderRadius: 16,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

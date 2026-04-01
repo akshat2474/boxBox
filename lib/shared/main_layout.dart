@@ -1,3 +1,4 @@
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -21,21 +22,26 @@ class MainLayout extends ConsumerWidget {
     return Scaffold(
       extendBody: true,
       body: navigationShell,
-      bottomNavigationBar: Container(
-        decoration: BoxDecoration(
-          color: AppTheme.surface,
-          border: const Border(top: BorderSide(color: AppTheme.border, width: 1)),
-        ),
-        child: SafeArea(
-          top: false,
-          child: SizedBox(
-            height: 60,
-            child: Row(
-              children: [
-                _NavItem(icon: Icons.home_rounded, label: 'Home', selected: navigationShell.currentIndex == 0, onTap: () => _onTap(0)),
-                _NavItem(icon: Icons.calendar_month_rounded, label: 'Schedule', selected: navigationShell.currentIndex == 1, onTap: () => _onTap(1)),
-                _NavItem(icon: Icons.article_rounded, label: 'News', selected: navigationShell.currentIndex == 2, onTap: () => _onTap(2)),
-              ],
+      bottomNavigationBar: ClipRRect(
+        child: BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
+          child: Container(
+            decoration: BoxDecoration(
+              color: AppTheme.surface.withOpacity(0.65),
+              border: Border(top: BorderSide(color: Colors.white.withOpacity(0.1), width: 1)),
+            ),
+            child: SafeArea(
+              top: false,
+              child: SizedBox(
+                height: 60,
+                child: Row(
+                  children: [
+                    _NavItem(icon: Icons.home_rounded, label: 'Home', selected: navigationShell.currentIndex == 0, onTap: () => _onTap(0)),
+                    _NavItem(icon: Icons.calendar_month_rounded, label: 'Schedule', selected: navigationShell.currentIndex == 1, onTap: () => _onTap(1)),
+                    _NavItem(icon: Icons.article_rounded, label: 'News', selected: navigationShell.currentIndex == 2, onTap: () => _onTap(2)),
+                  ],
+                ),
+              ),
             ),
           ),
         ),

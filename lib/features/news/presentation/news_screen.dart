@@ -54,7 +54,7 @@ class NewsScreen extends ConsumerWidget {
                         height: 260,
                         width: double.infinity,
                         fit: BoxFit.cover,
-                        errorWidget: (_, __, ___) => Container(height: 260, color: AppTheme.surface),
+                        errorWidget: (_, _, _) => Container(height: 260, color: AppTheme.surface),
                       )
                     else
                       Container(height: 260, color: AppTheme.surface),
@@ -128,7 +128,7 @@ class NewsScreen extends ConsumerWidget {
                               width: 110,
                               height: 110,
                               fit: BoxFit.cover,
-                              errorWidget: (_, __, ___) => Container(width: 110, height: 110, color: AppTheme.surfaceElevated),
+                              errorWidget: (_, _, _) => Container(width: 110, height: 110, color: AppTheme.surfaceElevated),
                             ),
                           )
                         else

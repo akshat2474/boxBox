@@ -1,7 +1,9 @@
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../core/theme/liquid_glass_theme.dart';
+import '../../../../shared/glass_card.dart';
 import '../../../services/standings_service.dart';
 
 class StandingsScreen extends ConsumerWidget {
@@ -14,16 +16,29 @@ class StandingsScreen extends ConsumerWidget {
     return Scaffold(
       backgroundColor: AppTheme.bg,
       appBar: AppBar(
-        title: const Text('Driver Standings', style: TextStyle(fontWeight: FontWeight.w800)),
-        backgroundColor: AppTheme.bg,
+        title: const Text('Driver Standings'),
+        backgroundColor: Colors.transparent,
         leading: const BackButton(color: Colors.white),
       ),
-      body: standingsAsync.when(
-        loading: () => const Center(child: CircularProgressIndicator(color: AppTheme.f1Red)),
-        error: (err, _) => Center(child: Text(err.toString(), style: const TextStyle(color: Colors.red))),
-        data: (standings) {
-          return ListView(
-            padding: const EdgeInsets.fromLTRB(16, 8, 16, 100),
+      extendBodyBehindAppBar: true,
+      body: Stack(
+        children: [
+          Positioned(
+            top: -50,
+            left: -100,
+            child: Container(
+              width: 300,
+              height: 300,
+              decoration: BoxDecoration(shape: BoxShape.circle, color: AppTheme.f1Red.withOpacity(0.15)),
+              child: BackdropFilter(filter: ImageFilter.blur(sigmaX: 100, sigmaY: 100), child: Container()),
+            ),
+          ),
+          standingsAsync.when(
+            loading: () => const Center(child: CircularProgressIndicator(color: AppTheme.f1Red)),
+            error: (err, _) => Center(child: Text(err.toString(), style: const TextStyle(color: Colors.red))),
+            data: (standings) {
+              return ListView(
+                padding: const EdgeInsets.fromLTRB(16, 120, 16, 100),
             children: [
               // Table header
               Padding(
@@ -37,12 +52,8 @@ class StandingsScreen extends ConsumerWidget {
                   ],
                 ),
               ),
-              Container(
-                decoration: BoxDecoration(
-                  color: AppTheme.surface,
-                  borderRadius: BorderRadius.circular(12),
-                  border: Border.all(color: AppTheme.border),
-                ),
+              GlassCard(
+                borderRadius: 12,
                 child: Column(
                   children: [
                     for (int i = 0; i < standings.length; i++) ...[
@@ -107,6 +118,8 @@ class StandingsScreen extends ConsumerWidget {
             ],
           );
         },
+      ),
+        ],
       ),
     );
   }

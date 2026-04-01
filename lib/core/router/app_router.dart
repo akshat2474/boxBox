@@ -7,6 +7,7 @@ import '../../features/standings/presentation/standings_screen.dart';
 import '../../features/schedule/presentation/schedule_screen.dart';
 import '../../features/news/presentation/news_screen.dart';
 import '../../features/race_hub/presentation/session_hub_screen.dart';
+import '../../features/splash/presentation/splash_screen.dart';
 import '../../shared/main_layout.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
@@ -14,8 +15,12 @@ final _rootNavigatorKey = GlobalKey<NavigatorState>();
 final goRouterProvider = Provider<GoRouter>((ref) {
   return GoRouter(
     navigatorKey: _rootNavigatorKey,
-    initialLocation: '/',
+    initialLocation: '/splash',
     routes: [
+      GoRoute(
+        path: '/splash',
+        builder: (context, state) => const SplashScreen(),
+      ),
       GoRoute(
         parentNavigatorKey: _rootNavigatorKey,
         path: '/hub/:sessionKey',

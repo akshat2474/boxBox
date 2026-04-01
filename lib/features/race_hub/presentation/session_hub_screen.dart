@@ -81,8 +81,9 @@ class _SessionHubScreenState extends ConsumerState<SessionHubScreen> {
     String countdown = '';
     if (date != null) {
       final diff = date.difference(DateTime.now());
-      if (diff.inDays > 0) countdown = '${diff.inDays}d ${diff.inHours.remainder(24)}h';
-      else if (diff.inHours > 0) countdown = '${diff.inHours}h ${diff.inMinutes.remainder(60)}m';
+      if (diff.inDays > 0) {
+        countdown = '${diff.inDays}d ${diff.inHours.remainder(24)}h';
+      } else if (diff.inHours > 0) countdown = '${diff.inHours}h ${diff.inMinutes.remainder(60)}m';
       else countdown = '${diff.inMinutes}m';
     }
 
@@ -172,8 +173,11 @@ class _SessionHubScreenState extends ConsumerState<SessionHubScreen> {
 
     return GestureDetector(
       onTap: hasDetails ? () => setState(() {
-        if (isExpanded) _expandedIndices.remove(index);
-        else _expandedIndices.add(index);
+        if (isExpanded) {
+          _expandedIndices.remove(index);
+        } else {
+          _expandedIndices.add(index);
+        }
       }) : null,
       child: Container(
         margin: const EdgeInsets.only(bottom: 8),
